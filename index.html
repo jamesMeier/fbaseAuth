@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>FBase Auth</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header">
+        <div>
+            <img id="logo" src="images/logo.png" alt="logo">
+        </div>
+        <div class="hide-when-signed-in">
+            <span id="sign-in-header-link" class="auth" auth="show-sign-in-form">Sign In</span>
+            <button id="create-user-header-link" class="auth" auth="show-create-user-form">
+                Create User
+            </button>
+        </div>
+        <div class="hide-when-signed-out hide" id="user-details-header">
+            <img id="profile-photo-header" src="images/user.png" alt="user">
+            <h1 id="display-name"></h1>
+        </div>
+    </div>
+    <!-- Header -->
+    <img src="images/hero-banner.png" alt="hero banner" class="hide-when-signed-in">
+    <!-- Footer -->
+    <div id="footer">
+        <div>
+            <p>
+                <b>About</b><br>
+                <i>Easily track to do's</i>
+            </p>
+        </div>
+        <div>
+            <p>
+                <b>Why</b><br>
+                <i>Makes life easier</i>
+            </p>
+        </div>
+        <div>
+            <p>
+                <b>Cost</b><br>
+                <i>Completely free to use</i>
+            </p>
+        </div>
+    </div>
+    <!-- Footer -->
+    <!-- Modal -->
+    <div id="modal">
+        <!-- Modal Content -->
+        <div id="modal-content">
+            <button id="close">&times</button>
+            <!-- Authentication -->
+            <div id="authentication">
+                <!-- Create user form -->
+                <form id="create-user-form">
+                    <div id="create-user-inputs">
+                        <input type="text" id="create-user-display-name" placeholder="Display Name" requried autocomplete="off">
+                        <input type="email" id="create-user-email" placeholder="Email" requ ried autocomplete="off">
+                        <input type="password" id="create-user-password" placeholder="password" requried autocomplete="off">
+                    </div>
+                    <button id="create-user-button" type="submit">Create User</button>
+                </form>
+                <!-- Create user form -->
+                <!-- Sign in form -->
+                <form id="sign-in-form">
+                    <div id="sign-in-inputs">
+                        <input type="email" id="sign-in-email" placeholder="Email" requried autocomplete="off">
+                        <input type="password" id="sign-in-password" placeholder="password" requried autocomplete="off">
+                    </div>
+                    <div id="forgot-password-link" class="auth" auth="show-forgot-passwordform">Forgot?</div>
+                    <button id="sign-in-button" type="submit">Sign In</button>
+                </form>
+                <!-- Sign in form -->
+                <!-- Forgot password form -->
+                <form id="forgot-password-form">
+                    <div id="forgot-password-inputs">
+                        <input type="email" id="forgot-password-email" placeholder="Email" requried
+                            autocomplete="off">
+                    </div>
+                    <button id="forgot-password-button" type="submit">Send Recovery Email</ button>
+                </form>
+                <!-- Forgot password form -->
+                <!-- Have or need account dialog -->
+                <div id="have-or-need-account-dialog">
+                    <p id="create-user-dialog">
+                        Don't have and account?
+                        <span id="create-user-link" class="auth" auth="show-create-user-form">
+                            Create User
+                        </span>
+                    </p>
+                    <p id="sign-in-dialog">
+                        Already have an account?
+                        <span id="sign-in-link" class="auth" auth="show-sign-in-form">
+                            Create User
+                        </span>
+                    </p>
+                </div>
+                <!-- Have or need account dialog -->
+            </div>
+        </div>
+        <!-- Authentication -->
+    </div>
+    <!-- Modal Content -->
+    </div>
+    <!-- Modal -->
+
+    <script src="app.js" charset="utf-8"></script>
+
+</body>
+
+</html>

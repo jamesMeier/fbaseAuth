@@ -1,0 +1,104 @@
+/* Lesson #1 - Basic styles, header, buttons */
+body{
+    font-family: 'Open Sans', sans-serif;
+    margin: 0px;
+    color: gray;
+    text-align: center;
+   }
+   h1{
+    margin: 0px 0px 20px 0px;
+    font-size: 24px;
+    font-family: 'Nothing You Could Do', cursive
+   }
+   img{
+    width: 100%
+   }
+   button{
+    padding: 5px 12px 5px 12px;
+    background: linear-gradient(#A29B9B, gray);
+    color: white;
+    border: 0px;
+    border-radius: 2px;
+    font-size: 20px;
+    margin-top: 20px;
+   }
+   button:hover{
+    background: linear-gradient(#A6D1EC, #32A1D7);
+   }
+   button:focus{
+    outline: none;
+   }
+   .hide{
+    display: none;
+   }
+   .auth{
+    cursor: pointer;
+   }
+   #header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 40px;
+    text-align: right;
+    padding: 20px 40px 30px 40px
+   }
+   #logo{
+    max-width: 200px;
+    float: left;
+   }
+   #display-name-header{
+    float: right;
+    margin: 30px 20px
+   }
+   #profile-photo-header{
+    max-width: 60px;
+    border-radius: 100px;
+    margin-top: 10px;
+    float: right
+   }
+   #user-details-header{
+    text-align: right;
+   }
+   #sign-in-header-link{
+    padding: 0px 20px 0px 10px;
+    transition: 0.5s;
+   }
+   #sign-in-header-link:hover{
+    padding: 0px 20px 0px 20px;
+    border-left: 1px solid #32A1D7
+   }
+   #footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #F9F4F4;
+    color: gray;
+    padding: 30px 20px 50px 20px;
+   }
+   #modal{
+    display:none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4)
+   }
+   #modal-content{
+    background-color: #fefefe;
+    margin: 4% auto;
+    border: 1px solid #888888;
+    max-width: 350px;
+   }
+   #close{
+    float: right;
+    margin-right: -15px;
+    margin-top: -15px;
+    font-weight: bold;
+    padding: 0px 7px 5px 7px;
+    border-radius: 100px;
+   }
+   #close:hover, #close:focus{
+    text-decoration: none;
+    cursor: pointer;
+   }
