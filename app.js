@@ -26,7 +26,7 @@ const signInForm = document.getElementById('sign-in-form')
 // get auth dialogues
 const createUserDialog = document.getElementById('create-user-dialog')
 const signInDialog = document.getElementById('sign-in-dialog')
-const hideOrNeedAccountDialog = document.getElementById('hide-or-need-account-dialog')
+const hideOrNeedAccountDialog = document.getElementById('have-or-need-account-dialog')
 
 
 //invoked when user wants to create a new account
@@ -40,8 +40,11 @@ showCreateUserForm = () => {
 
 //invoked when user wants to sign in 
 showSignInForm = () => {
+    hideAuthElements()
     modal.style.display='block'
-
+    signInForm.classList.remove('hide');
+    signInDialog.classList.remove('hide');
+    hideOrNeedAccountDialog.classList.remove('hide')
 }
 
 showForgotPasswordForm = () => {
