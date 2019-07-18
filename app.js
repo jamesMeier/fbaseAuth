@@ -114,4 +114,28 @@ auth.onAuthStateChanged(user =>{
         // bock runs if not signed in
         console.log('not signed in')
     }
+});
+
+createUserForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const displayName = document.getElementById('create-user-display-name').value
+    const email = document.getElementById('create-user-email').value
+    const password = document.getElementById('create-user-password').value
+    // console.log(displayName);
+    // console.log(email);
+    // console.log(password);
+    auth.createUserWithEmailAndPAssword(email, password)
+    .then(() => {
+        //using firebase.auth due to scoping issue
+        firebase.auth().currentUser.updateProfile({
+            //object       grabbing from form
+            displayName: displayName
+        })
+        createUserForm.reset()
+        hideAuthElements()
+    })
+    .catch(error => {
+        console.log(error.message)
+        
+    })
 })
