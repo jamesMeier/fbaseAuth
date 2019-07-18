@@ -1,3 +1,19 @@
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDSiCkhUM6gPRkY8j__50e9PWLQnP21eSw",
+    authDomain: "fbauth-6f61e.firebaseapp.com",
+    databaseURL: "https://fbauth-6f61e.firebaseio.com",
+    projectId: "fbauth-6f61e",
+    storageBucket: "",
+    messagingSenderId: "556620878443",
+    appId: "1:556620878443:web:eaf104086b6d1bd4"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+//reference to auth method of firebase
+
+var auth = firebase.auth();
+
 //get modal 
 const modal = document.getElementById('modal');
 
@@ -83,3 +99,5 @@ hideAuthElements = () => {
     haveOrNeedAccountDialog.classList.add('hide');
     forgotPasswordForm.classList.add('hide');
 }
+
+//uid 
