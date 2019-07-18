@@ -80,7 +80,7 @@ console.log(authAction)
 authAction.forEach(item => {
     item.addEventListener('click', event => {
         let chosen = event.target.getAttribute('auth')
-        console.log(chosen)
+        // console.log(chosen)
         if (chosen === 'show-create-user-form'){
             showCreateUserForm()
         } else if (chosen === 'show-sign-in-form'){
@@ -110,6 +110,8 @@ auth.onAuthStateChanged(user =>{
         //code block runs if user is signed in
         uid = user.uid
         modal.style.display='none'
+        console.log(user);
+        
     } else {
         // bock runs if not signed in
         console.log('not signed in')
@@ -124,7 +126,7 @@ createUserForm.addEventListener('submit', event => {
     // console.log(displayName);
     // console.log(email);
     // console.log(password);
-    auth.createUserWithEmailAndPAssword(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
     .then(() => {
         //using firebase.auth due to scoping issue
         firebase.auth().currentUser.updateProfile({
@@ -141,12 +143,29 @@ createUserForm.addEventListener('submit', event => {
 })
 
 signInForm.addEventListener('submit', event => {
+    event.preventDefault();
     const email = document.getElementById('sign-in-email').value
     const password = document.getElementById('sign-in-password').value
     auth.signInWithEmailAndPassword(email, password)
     .then(() => {
         signInForm.reset()
         hideAuthElements()
+    })
+    .catch(error => {
+        console.log(error.message);
+        
+    })
+})
+
+forgotPasswordForm.addEventListener('submit', event => {
+    event.preventDefault();
+    email = document.getElementById('forgot-password-email').value
+    auth.sendPasswordResetEmail(email)
+    .then(() => {
+        forgotPasswordForm.reset()
+        // hideAuthElements()
+        console.log('message sent. please check your email');
+        
     })
     .catch(error => {
         console.log(error.message);
