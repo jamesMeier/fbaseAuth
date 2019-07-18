@@ -139,3 +139,17 @@ createUserForm.addEventListener('submit', event => {
         
     })
 })
+
+signInForm.addEventListener('submit', event => {
+    const email = document.getElementById('sign-in-email').value
+    const password = document.getElementById('sign-in-password').value
+    auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+        signInForm.reset()
+        hideAuthElements()
+    })
+    .catch(error => {
+        console.log(error.message);
+        
+    })
+})
