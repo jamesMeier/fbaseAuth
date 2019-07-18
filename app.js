@@ -100,4 +100,18 @@ hideAuthElements = () => {
     forgotPasswordForm.classList.add('hide');
 }
 
-//uid 
+//uid  needs to be global. declare here but get the value from auth state listener
+var uid
+
+// firebase monitors the auth state in real time. use if/else satement to do diff things based on state
+
+auth.onAuthStateChanged(user =>{
+    if (user) {
+        //code block runs if user is signed in
+        uid = user.uid
+        modal.style.display='none'
+    } else {
+        // bock runs if not signed in
+        console.log('not signed in')
+    }
+})
