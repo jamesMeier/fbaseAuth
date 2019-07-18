@@ -139,4 +139,7 @@ body{
     grid-column-end: span 2;
    }
    #have-or-need-account-dialog{
-    padding-top: 10p
+    padding-top: 10px;
+    margin: auto;
+    max-width: 350px
+   }

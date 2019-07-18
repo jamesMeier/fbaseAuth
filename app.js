@@ -26,15 +26,16 @@ const signInForm = document.getElementById('sign-in-form')
 // get auth dialogues
 const createUserDialog = document.getElementById('create-user-dialog')
 const signInDialog = document.getElementById('sign-in-dialog')
-const hideOrNeedAccountDialog = document.getElementById('have-or-need-account-dialog')
+const haveOrNeedAccountDialog = document.getElementById('have-or-need-account-dialog')
 
 
 //invoked when user wants to create a new account
 showCreateUserForm = () => {
+    hideAuthElements();
     modal.style.display='block'
     createUserForm.classList.remove('hide');
     signInDialog.classList.remove('hide');
-    hideOrNeedAccountDialog.classList.remove('hide')
+    haveOrNeedAccountDialog.classList.remove('hide')
 
 }
 
@@ -43,23 +44,17 @@ showSignInForm = () => {
     hideAuthElements()
     modal.style.display='block'
     signInForm.classList.remove('hide');
-    signInDialog.classList.remove('hide');
-    hideOrNeedAccountDialog.classList.remove('hide')
+    createUserDialog.classList.remove('hide');
+    haveOrNeedAccountDialog.classList.remove('hide')
 }
 
 showForgotPasswordForm = () => {
-    hideAuthElements()
+    hideAuthElements();
+    modal.style.display = 'block';
     forgotPasswordForm.classList.remove('hide')
 }
 
-hideAuthElements = () => {
-    createUserForm.classList.add('hide');
-    signInDialog.classList.add('hide');
-    signInForm.classList.add('hide');
-    createUserDialog.classList.add('hide');
-    hideOrNeedAccountDialog.classList.add('hide');
-    forgotPasswordForm.classList.add('hide');
-}
+
 // acces auth elements yo listen for auth action 
 
 const authAction = document.querySelectorAll('.auth')
@@ -79,3 +74,12 @@ authAction.forEach(item => {
         };
     });
 });
+
+hideAuthElements = () => {
+    createUserForm.classList.add('hide');
+    signInDialog.classList.add('hide');
+    signInForm.classList.add('hide');
+    createUserDialog.classList.add('hide');
+    haveOrNeedAccountDialog.classList.add('hide');
+    forgotPasswordForm.classList.add('hide');
+}
