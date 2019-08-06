@@ -16,6 +16,9 @@
 </head>
 
 <body>
+    <!-- Email not verified notification -->
+    <div id="email-not-verified-notification" class="hide"></div>
+    <!-- Email not verified notification -->
     <!-- Header -->
     <div id="header">
         <div>
@@ -29,11 +32,33 @@
         </div>
         <div class="hide-when-signed-out hide" id="user-details-header">
             <img id="profile-photo-header" src="images/user.png" alt="user">
-            <h1 id="display-name"></h1>
+            <h1 id="display-name-header"></h1>
         </div>
     </div>
     <!-- Header -->
     <img src="images/hero-banner.png" alt="hero banner" class="hide-when-signed-in">
+    <!-- Dashboard -->
+    <div class="hide-when-signed-out">
+        <div id="dashboard">
+            <div>
+                placeholder
+            </div>
+
+            <div>
+                placeholder
+            </div>
+
+            <div>
+                <div id="account">
+                    <h1>Account</h1>
+                    <img src="images/user.png" alt="user" id="profile-photo-account">
+                    <button class="auth" auth="sign-out">Sign Out</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Dashboard -->
     <!-- Footer -->
     <div id="footer">
         <div>
@@ -91,6 +116,21 @@
                     </div>
                     <button id="forgot-password-button" type="submit">Send Recovery Email</button>
                 </form>
+                <!-- Forgot password form form -->
+                <!-- Success and error messages -->
+                <div id="message"></div>
+                <!-- Success and error messages -->
+
+                <!-- Loading visual cue -->
+                <div id="loading-outer-container">
+                    <div id="loading-inner-container">
+                        <div id="loadspin">
+                            <div id="circle1"></div>
+                            <div id="circle2"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Loading visual cue -->
                 <!-- Forgot password form -->
                 <!-- Have or need account dialog -->
                 <div id="have-or-need-account-dialog">

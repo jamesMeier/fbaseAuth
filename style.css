@@ -28,9 +28,6 @@ body{
    button:focus{
     outline: none;
    }
-   .hide{
-    display: none;
-   }
    .auth{
     cursor: pointer;
    }
@@ -40,6 +37,27 @@ body{
     grid-column-gap: 40px;
     text-align: right;
     padding: 20px 40px 30px 40px
+   }
+   #account {
+    background-color: #f9f4f4;
+    padding: 30px;
+    border-radius: 20px;
+   }
+   #dashboard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    padding: 20px 40px 50px 40px;
+   }
+   #profile-photo-account{
+    display: block;
+    max-width: 150px;
+    margin: auto;
+    border-radius: 100px;
+   }
+   #display-name{
+    margin: 30px 20px;
+    float: right
    }
    #logo{
     max-width: 200px;
@@ -143,3 +161,71 @@ body{
     margin: auto;
     max-width: 350px
    }
+   #message{
+    display: none;
+    border: 1px solid;
+    position: relative;
+    margin: 40px 20px 20px 20px;
+    padding: 10px
+   }
+   .hide{
+    display: none;
+   }
+
+   /* loading visual cue*/
+   #loading-outer-container{
+    margin: 40px auto;
+   }
+   #loading-inner-container{
+    position:relative;
+    width:40px;
+    height:40px;
+    left:0;
+    right:0;
+    margin:auto;
+    top:20%;
+   }
+   #loadspin{
+    width:40px;
+    height:40px;
+    position:absolute;
+    margin: 0 auto;   
+   }
+   #circle1{
+       background-color: #39b1c6
+   }
+   #circle2{
+    background-color: #e3cf8c
+    }
+    #circle1,#circle2{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        opacity: 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-animation: bounce 2s infinite ease-in-out;
+        animation: bounce 2s infinite ease-in-out;
+
+    }
+    #circle2{
+        -webkit-animation-delay: -1s;
+        animation-delay: -1s;
+    }
+    @-webkit-keyframes bounce {
+        0%, 100%{
+            -webkit-transform: scale(0)
+        }
+        50%{
+            -webkit-transform: scale(1)
+        }
+    }
+    @webkit-keyframes bounce {
+        0%, 100%{
+            -webkit-transform: scale(0)
+        }
+        50%{
+            -webkit-transform: scale(1)
+        }
+    }
