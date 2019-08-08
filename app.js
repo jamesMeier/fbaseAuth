@@ -95,8 +95,19 @@ signOut = () => {
     hideAuthElements()
     auth.signOut()
     console.log()
-
 }
+// user signs in with google
+signInWithGoogle = () => {
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(googleProvider)
+    .then(() => {
+        hideAuthElements()
+    })
+    .catch(error => {
+        displayMessage('error', error.message)
+    })
+}
+
 
 // loop through elements and use auth att to determine what action to takewhen clicked
 
@@ -112,7 +123,9 @@ authAction.forEach(item => {
             showForgotPasswordForm()
         } else if (chosen === `sign-out`) {
             signOut()
-        };
+        } else if (chosen === `sign-in-with-google`) {
+            signInWithGoogle()
+        }
     });
 });
 
