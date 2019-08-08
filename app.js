@@ -39,6 +39,9 @@ const createUserForm = document.getElementById('create-user-form')
 const forgotPasswordForm = document.getElementById('forgot-password-form')
 const signInForm = document.getElementById('sign-in-form')
 
+//get element that holds oauth providers
+const oauthProviders = document.getElementById('oauth-providers')
+
 // get auth dialogues
 const createUserDialog = document.getElementById('create-user-dialog')
 const signInDialog = document.getElementById('sign-in-dialog')
@@ -64,6 +67,7 @@ const authAction = document.querySelectorAll('.auth')
 showCreateUserForm = () => {
     hideAuthElements();
     modal.style.display = 'block'
+    oauthProviders.classList.remove('hide')
     createUserForm.classList.remove('hide');
     signInDialog.classList.remove('hide');
     haveOrNeedAccountDialog.classList.remove('hide')
@@ -74,6 +78,7 @@ showCreateUserForm = () => {
 showSignInForm = () => {
     hideAuthElements()
     modal.style.display = 'block'
+    oauthProviders.classList.remove('hide')
     signInForm.classList.remove('hide');
     createUserDialog.classList.remove('hide');
     haveOrNeedAccountDialog.classList.remove('hide')
@@ -114,6 +119,7 @@ authAction.forEach(item => {
 hideAuthElements = () => {
     clearMessage()
     loading('hide')
+    oauthProviders.classList.add('hide')
     createUserForm.classList.add('hide');
     signInDialog.classList.add('hide');
     signInForm.classList.add('hide');
