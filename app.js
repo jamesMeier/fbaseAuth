@@ -4,7 +4,7 @@ var firebaseConfig = {
     authDomain: "fbauth-6f61e.firebaseapp.com",
     databaseURL: "https://fbauth-6f61e.firebaseio.com",
     projectId: "fbauth-6f61e",
-    storageBucket: "",
+    storageBucket: "fbauth-6f61e.appspot.com",
     messagingSenderId: "556620878443",
     appId: "1:556620878443:web:eaf104086b6d1bd4"
 };
@@ -43,6 +43,10 @@ const signInForm = document.getElementById('sign-in-form')
 const createUserDialog = document.getElementById('create-user-dialog')
 const signInDialog = document.getElementById('sign-in-dialog')
 const haveOrNeedAccountDialog = document.getElementById('have-or-need-account-dialog')
+
+//get eleemtn where email verification will be placed
+const emailNotVerifiedNotification = document.getElementById('email-not-verified-notification')
+
 
 // gt elements that eed to be hidden or shown base on auth state
 
@@ -127,7 +131,7 @@ var uid
 auth.onAuthStateChanged(user => {
     if (user) {
         // Everything inside here happens if user is signed in
-        console.log(user.displayName)
+        console.log(user)
         uid = user.uid
         modal.style.display = `none`
         // Hides or shows elements depending on if user is signed in
@@ -137,8 +141,28 @@ auth.onAuthStateChanged(user => {
         hideWhenSignedOut.forEach(eachItem => {
             eachItem.classList.remove(`hide`)
         })
-        document.getElementById(`display-name-header`).textContent = `Hello, ${user.displayName}`
-        
+
+        if(user.displayName) {
+            document.getElementById(`display-name-header`).textContent = `Hello, ${user.displayName}`
+         }
+        //happens if localstorgae has info saying user is authenticated with email
+        if(localStorage.getItem('isAuthenticatedWithEmail')) {
+            //happens if emailverified = false
+            if (!user.emailVerified) {
+                //happens if verification = null
+                if (!localStorage.getItem('emailVerificationSent')) {
+                    //send email
+                    user.sendEmailVerification().then(()=> {
+                        localStorage.setItem('emailVerificationSent', 'true');
+                    }) 
+                } else {
+                    console.log('verification email has been sent');  
+                }
+                emailNotVerifiedNotification.textContent=`Email not verified, Click the link inside the email we sent to ${user.email}`
+                emailNotVerifiedNotification.classList.remove('hide')
+            }
+
+        }
         
     } else {
         // Everything inside here happens if user is not signed in
@@ -171,6 +195,7 @@ createUserForm.addEventListener('submit', event => {
             })
             createUserForm.reset()
             hideAuthElements()
+            localStorage.setItem('IsAuthenticatedWithEmail', 'true')
         })
         .catch(error => {
             loading('hide')
@@ -188,6 +213,7 @@ signInForm.addEventListener('submit', event => {
         .then(() => {
             signInForm.reset()
             hideAuthElements()
+            localStorage.setItem('isAuthenticatedWithEmail', 'true')
         })
         .catch(error => {
             loading('hide')

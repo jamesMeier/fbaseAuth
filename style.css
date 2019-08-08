@@ -229,3 +229,11 @@ body{
             -webkit-transform: scale(1)
         }
     }
+
+    /* email verification */
+    #email-not-verified-notification {
+        background-color: red;
+        color: white;
+        font-size: 12px;
+        padding: 4px;
+    }
