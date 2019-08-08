@@ -237,3 +237,26 @@ body{
         font-size: 12px;
         padding: 4px;
     }
+    /* oath */
+
+    #oauth-providers-grid{
+        padding-bottom: 40px;
+        display: grid;
+        grid-gap: 45px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin: auto;
+       }
+       #or{
+        border-top: 2px solid #EFEFEF;
+        position: relative;
+        margin-bottom: 40px;
+       }
+       #or > p{
+        position: absolute;
+        top: -13px;
+        left: 45%;
+        width: 10%;
+        text-align: center;
+        margin: 0px;
+        background-color: white;
+       }
