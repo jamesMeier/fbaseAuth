@@ -108,6 +108,18 @@ signInWithGoogle = () => {
     })
 }
 
+// sign in with facebook
+signInWithFacebook = () => {
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
+    auth.signInWithPopup(facebookProvider)
+    .then(() => {
+        hideAuthElements()
+    })
+    .catch(error => {
+        displayMessage('error', error.message)
+    }
+}
+
 
 // loop through elements and use auth att to determine what action to takewhen clicked
 
@@ -125,6 +137,8 @@ authAction.forEach(item => {
             signOut()
         } else if (chosen === `sign-in-with-google`) {
             signInWithGoogle()
+        }else if (chosen === `sign-in-with-facebook`) {
+            signInWithFacebook()
         }
     });
 });
