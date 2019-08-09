@@ -117,7 +117,19 @@ signInWithFacebook = () => {
     })
     .catch(error => {
         displayMessage('error', error.message)
-    }
+    })
+}
+
+//sign in with twitter
+signInWithTwitter = () => {
+    const twitterProvider = new firebase.auth.TwitterAuthProvider();
+    auth.signInWithPopup(twitterProvider)
+    .then(() => {
+        hideAuthElements()
+    })
+    .catch(error => {
+        displayMessage('error', error.message)
+    })
 }
 
 
@@ -137,8 +149,10 @@ authAction.forEach(item => {
             signOut()
         } else if (chosen === `sign-in-with-google`) {
             signInWithGoogle()
-        }else if (chosen === `sign-in-with-facebook`) {
+        } else if (chosen === `sign-in-with-facebook`) {
             signInWithFacebook()
+        } else if (chosen === `sign-in-with-twitter`) {
+            signInWithTwitter()
         }
     });
 });
