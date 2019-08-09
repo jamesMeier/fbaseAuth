@@ -132,7 +132,17 @@ signInWithTwitter = () => {
     })
 }
 
-
+//signin with github
+signInWithGithub = () => {
+    const githubProvider = new firebase.auth.GithubAuthProvider();
+    auth.signInWithPopup(githubProvider)
+    .then(() => {
+        hideAuthElements()
+    })
+    .catch(error => {
+        displayMessage('error', error.message)
+    })
+}
 // loop through elements and use auth att to determine what action to takewhen clicked
 
 authAction.forEach(item => {
@@ -153,6 +163,8 @@ authAction.forEach(item => {
             signInWithFacebook()
         } else if (chosen === `sign-in-with-twitter`) {
             signInWithTwitter()
+        } else if (chosen === `sign-in-with-github`) {
+            signInWithGithub()
         }
     });
 });
