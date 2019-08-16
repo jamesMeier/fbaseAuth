@@ -400,7 +400,8 @@ loading = (action) => {
      //create storgae ref unique to user usig their uid
      const storageRef = storage.ref(`user-profile-photos/${uid}`)
      //upload file
-     photoUploadTask.on('state-changed', snapshot => {
+     const photoUploadTask = storageRef.put(file)
+     photoUploadTask.on('state_changed', snapshot => {
          let percentage = snapshot.bytesTransferred /snapshot.totalBytes * 100
          if (percentage<10) {
              progressBar.style.width=`10%`
