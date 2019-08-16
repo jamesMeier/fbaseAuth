@@ -14,6 +14,9 @@ firebase.initializeApp(firebaseConfig);
 
 var auth = firebase.auth();
 
+// Reference to storage method of Firebase
+var storage = firebase.storage()
+
 //get modal 
 const modal = document.getElementById('modal');
 
@@ -33,7 +36,8 @@ window.addEventListener('click', event => {
         modal.style.display = 'none';
     }
 })
-
+//uid  needs to be global. declare here but get the value from auth state listener
+var uid
 // get forms for email and apssword auth
 const createUserForm = document.getElementById('create-user-form')
 const forgotPasswordForm = document.getElementById('forgot-password-form')
@@ -56,7 +60,13 @@ const showDeleteAccountDialogTrigger = document.getElementById('show-delete-acco
 
 const hideWhenSignedIn = document.querySelectorAll('.hide-when-signed-in')
 const hideWhenSignedOut = document.querySelectorAll('.hide-when-signed-out')
-
+//gt element that is input we wil click to upload file
+const uploadProfilePhotoButton = document.getElementById('upload-profile-photo-button')
+// get elements where will place users photots
+const profilePhotoAccount = document.getElementById('profile-photo-account')
+const profilePhotoHeader = document.getElementById('profile-photo-header')
+// Get element that shows the progress of the photo uploading action
+const progressBar = document.getElementById('progress-bar')
 //get access to element where we shall place our error/success message
 const authMessage = document.getElementById('message')
 // acces auth elements yo listen for auth action 
@@ -146,6 +156,7 @@ signInWithGithub = () => {
 }
 // delete account
 delteAccount = () => {
+    storage.ref(`user-profile-photos/`).child(uid).delete()
     auth.currentUser.delete()
     .then(()=> {
         cleaeLocalStorage()
@@ -215,8 +226,6 @@ hideAuthElements = () => {
     forgotPasswordForm.classList.add('hide');
 }
 
-//uid  needs to be global. declare here but get the value from auth state listener
-var uid
 
 // firebase monitors the auth state in real time. use if/else satement to do diff things based on state
 
@@ -227,6 +236,11 @@ auth.onAuthStateChanged(user => {
         console.log(user)
         uid = user.uid
         modal.style.display = `none`
+        //if user has a phot url use that
+        if (user.photoURL) {
+            profilePhotoAccount.setAttribute('src', user.photoURL)
+            profilePhotoHeader.setAttribute('src', user.photoURL)
+        }
         // Hides or shows elements depending on if user is signed in
         hideWhenSignedIn.forEach(eachItem => {
             eachItem.classList.add(`hide`)
@@ -375,3 +389,43 @@ loading = (action) => {
         console.log('loading error');
     }
 }
+ //photo file is globalso we can acceess it after it uploads
+
+ let photoFile
+
+ // event listener for upload phoroto button 
+ uploadProfilePhotoButton.addEventListener('change', event => {
+     //access chosen evemt
+     let file = event.target.files[0]
+     //create storgae ref unique to user usig their uid
+     const storageRef = storage.ref(`user-profile-photos/${uid}`)
+     //upload file
+     photoUploadTask.on('state-changed', snapshot => {
+         let percentage = snapshot.bytesTransferred /snapshot.totalBytes * 100
+         if (percentage<10) {
+             progressBar.style.width=`10%`
+             progressBar.innerHTML = `${percentage.toFixed(0)}%`
+         } else {
+            progressBar.style.width=`${percentage}%`
+            progressBar.innerHTML = `${percentage.toFixed(0)}%`
+         }
+     },
+     error = (error)=> {
+         displayMessage(`error`, error.message)
+     },
+     complete = () => {
+        photoUploadTask.snapshot.ref().getDownloadURL()
+        .then(() => {
+            firebase.auth().currentUser.updateProfile({
+                photoURL: url
+            }).then(()=> {
+                profilePhotoAccount.setAttribute('src', auth.currentUser.photoURL)
+                profilePhotoHeader.setAttribute('src', auth.currentUser.photoURL)
+                progressBar.style.width=`0%`
+                progressBar.innerHTML = ``
+            })
+        })
+
+     }
+     )
+ })

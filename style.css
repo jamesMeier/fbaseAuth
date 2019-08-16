@@ -282,3 +282,34 @@ body{
        #hide-delete-account-dialog-trigger:hover{
         background-color: linear-gradient(#FF8597, red)
        }
+
+       #progress-bar{
+        color: white;
+        background-color: orange;
+        padding: 3px 0px 3px 0px;
+        text-align: center;
+        font-size: 10px;
+        width: 0%;
+       }
+       input[type=file]::-webkit-file-upload-button{
+        padding: 5px 12px 5px 12px;
+        background: linear-gradient(#A29B9B, gray);
+        color: white;
+        border: 0px;
+        border-radius: 2px;
+        font-size: 20px;
+        margin-top: 20px;
+        text-align: center;
+        cursor: pointer;
+       }
+       input[type=file]::-webkit-file-upload-button:hover{
+        background: linear-gradient(#A6D1EC, #32A1D7);
+       }
+       input[type=file]::-webkit-file-upload-button:focus{
+        outline:none
+       }
+       input[type=file]{
+        margin: auto;
+        display: inline;
+        width: 260px;
+       }
