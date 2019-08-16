@@ -260,3 +260,25 @@ body{
         margin: 0px;
         background-color: white;
        }
+       #show-delete-account-dialog-trigger{
+        color: red;
+        text-align: center;
+        margin-top: 30px;
+        font-size: 12px;
+       }
+       #delete-account-dialog{
+        color: red;
+        text-align: center;
+        border-radius: 5px;
+        margin-top: 40px;
+        padding: 10px 10px 15px 10px;
+        border: 3px solid #EFEFEF;
+        background-color: white;
+       }
+       #delete-account-dialog > p{
+        font-size: 12px;
+        margin: 0px;
+       }
+       #hide-delete-account-dialog-trigger:hover{
+        background-color: linear-gradient(#FF8597, red)
+       }

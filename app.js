@@ -46,11 +46,12 @@ const oauthProviders = document.getElementById('oauth-providers')
 const createUserDialog = document.getElementById('create-user-dialog')
 const signInDialog = document.getElementById('sign-in-dialog')
 const haveOrNeedAccountDialog = document.getElementById('have-or-need-account-dialog')
-
+const deleteAccountDialog = document.getElementById('delete-account-dialog')
 //get eleemtn where email verification will be placed
 const emailNotVerifiedNotification = document.getElementById('email-not-verified-notification')
 
-
+//get triger to show delete dialog
+const showDeleteAccountDialogTrigger = document.getElementById('show-delete-account-dialog-trigger')
 // gt elements that eed to be hidden or shown base on auth state
 
 const hideWhenSignedIn = document.querySelectorAll('.hide-when-signed-in')
@@ -143,8 +144,34 @@ signInWithGithub = () => {
         displayMessage('error', error.message)
     })
 }
-// loop through elements and use auth att to determine what action to takewhen clicked
+// delete account
+delteAccount = () => {
+    auth.currentUser.delete()
+    .then(()=> {
+        cleaeLocalStorage()
+        hideAuthElements()
+    })
+    .catch(()=> {
+        if (error.code==='auth/requires-recent-login') {
+            auth.signOut()
+            .then(()=>{
+                showSignInForm()
+                displayMessage('error', error.message)
+            })
+        }
+    })
+}
+//when user clicks show account dialog trigger
+showDeleteAccountDialog= () => {
+    deleteAccountDialog.classList.remove('hide')
+    showDeleteAccountDialogTrigger.classList.add('hide')
+}
 
+hideDeleteAccountDialog= () => {
+    deleteAccountDialog.classList.add('hide')
+    showDeleteAccountDialogTrigger.classList.remove('hide')
+}
+// loop through elements and use auth att to determine what action to takewhen clicked
 authAction.forEach(item => {
     item.addEventListener('click', event => {
         let chosen = event.target.getAttribute('auth')
@@ -165,6 +192,12 @@ authAction.forEach(item => {
             signInWithTwitter()
         } else if (chosen === `sign-in-with-github`) {
             signInWithGithub()
+        } else if (chosen === `show-delete-account-dialog`) {
+            showDeleteAccountDialog()
+        } else if (chosen === `hide-delete-account-dialog`) {
+            hideDeleteAccountDialog()
+        } else if (chosen === `delete-account`) {
+            delteAccount()
         }
     });
 });
@@ -173,6 +206,7 @@ hideAuthElements = () => {
     clearMessage()
     loading('hide')
     oauthProviders.classList.add('hide')
+    hideDeleteAccountDialog()
     createUserForm.classList.add('hide');
     signInDialog.classList.add('hide');
     signInForm.classList.add('hide');
