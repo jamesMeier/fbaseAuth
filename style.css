@@ -313,3 +313,7 @@ body{
         display: inline;
         width: 260px;
        }
+
+    .delete-button{
+        margin-left: 20px;
+       }

@@ -275,7 +275,7 @@ auth.onAuthStateChanged(user => {
         }
         // use uid to get data that user is auth to see
         database.ref('/to-do-list').orderByChild('uid').equalTo(uid).on('value', snapshot => {
-            document.getElementById('to-do-list-items').innerhtml=``
+            document.getElementById('to-do-list-items').innerHTML=``
             snapshot.forEach(data => {
                 let p = document.createElement('p')
                 p.textContent= data.val().item
@@ -284,7 +284,7 @@ auth.onAuthStateChanged(user => {
                 deleteButton.classList.add('delete-button')
                 deleteButton.setAttribute('data', data.key)
                 p.appendChild(deleteButton)
-                document.getElementById('to-do-list-items').appendChild()
+                document.getElementById('to-do-list-items').appendChild(p)
             })
         })
     } else {
@@ -459,4 +459,12 @@ loading = (action) => {
      })
      toDoListForm.reset()
 
+ })
+
+ // delete a to do list
+ document.body.addEventListener('click', event => {
+     if (event.target.matches('.delete-button')) {
+        key = event.target.getAttribute('data')
+        database.ref('/to-do-list').child(key).remove()
+     }
  })
