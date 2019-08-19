@@ -17,6 +17,9 @@ var auth = firebase.auth();
 // Reference to storage method of Firebase
 var storage = firebase.storage()
 
+// Reference to databasevmethod of Firebase
+var database = firebase.database()
+
 //get modal 
 const modal = document.getElementById('modal');
 
@@ -270,7 +273,20 @@ auth.onAuthStateChanged(user => {
             }
 
         }
-        
+        // use uid to get data that user is auth to see
+        database.ref('/to-do-list').orderByChild('uid').equalTo(uid).on('value', snapshot => {
+            document.getElementById('to-do-list-items').innerhtml=``
+            snapshot.forEach(data => {
+                let p = document.createElement('p')
+                p.textContent= data.val().item
+                let deleteButton = document.createElement('button');
+                deleteButton.textContent = 'x'
+                deleteButton.classList.add('delete-button')
+                deleteButton.setAttribute('data', data.key)
+                p.appendChild(deleteButton)
+                document.getElementById('to-do-list-items').appendChild()
+            })
+        })
     } else {
         // Everything inside here happens if user is not signed in
         console.log('not signed in');
@@ -401,7 +417,7 @@ loading = (action) => {
      const storageRef = storage.ref(`user-profile-photos/${uid}`)
      //upload file
      const photoUploadTask = storageRef.put(file)
-     photoUploadTask.on('state_changed', snapshot => {
+     photoUploadTask.on("state_changed", snapshot => {
          let percentage = snapshot.bytesTransferred /snapshot.totalBytes * 100
          if (percentage<10) {
              progressBar.style.width=`10%`
@@ -415,8 +431,8 @@ loading = (action) => {
          displayMessage(`error`, error.message)
      },
      complete = () => {
-        photoUploadTask.snapshot.ref().getDownloadURL()
-        .then(() => {
+        photoUploadTask.snapshot.ref.getDownloadURL()
+        .then((url) => {
             firebase.auth().currentUser.updateProfile({
                 photoURL: url
             }).then(()=> {
@@ -429,4 +445,18 @@ loading = (action) => {
 
      }
      )
+ })
+
+ //add todo item
+
+ const toDoListForm = document.getElementById('to-do-list-form')
+ toDoListForm.addEventListener('submit', event => {
+     event.preventDefault()
+     let item = document.getElementById('item').value
+     database.ref('/to-do-list').push({
+         item : item,
+         uid: uid
+     })
+     toDoListForm.reset()
+
  })

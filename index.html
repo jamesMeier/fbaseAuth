@@ -12,6 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
 
 
     <title>FBase Auth</title>
@@ -43,11 +44,16 @@
     <div class="hide-when-signed-out">
         <div id="dashboard">
             <div>
-                placeholder
+                <form id="to-do-list-form">
+                    <h1>New task</h1>
+                    <input type="text" id="item" placeholder="Task" , required autocomplete="off">
+                    <button type="submit">Add</button>
+                </form>
             </div>
 
             <div>
-                placeholder
+                <h1>To do list</h1>
+                <div id="to-do-list-items"></div>
             </div>
 
             <div>
